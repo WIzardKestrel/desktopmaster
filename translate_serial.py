@@ -9,6 +9,7 @@ interface = devices.Activate(
 volume = cast(interface, POINTER(IAudioEndpointVolume))
 volume.GetMasterVolumeLevel()
 
+
 arduino = serial.Serial(port='COM3', baudrate=9600, timeout=.1)
 
 def write(x):
@@ -41,10 +42,10 @@ while True:
     if vol == '':
         continue
     vol = (int(vol)/1000)
+
+    if vol < 0.035:
+        vol = 0
     if vol > 1:
         vol = 1
-    if vol == 0.001:
-        vol = 0
     volume.SetMasterVolumeLevelScalar(vol, None)
-
-
+    time.sleep(0.01)
