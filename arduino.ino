@@ -1,4 +1,4 @@
-int ledPin[] = {13,12,11,10,9,8,7,6,5,4}; // the pin that the LED is attached to
+int ledPin[] = {4,5,6,7,8,9,10,11,12,13}; // the pin that the LED is attached to
 int sound_lvl;
 int cont_lvl;
 int pot_pin = A1;
@@ -16,9 +16,11 @@ void setup() {
 void loop() {
 
   cont_lvl = (analogRead(pot_pin));
-  if (abs(cont_lvl - old_vol_lvl) > 20) {
+  if (abs(cont_lvl - old_vol_lvl) > 30) {
     old_vol_lvl = cont_lvl;
     Serial.println(cont_lvl);
+  }else{
+      
   }
 
   if (Serial.available() > 0) {
@@ -78,7 +80,7 @@ void turn_on(int level) {
   }
   for (int i = 14; i >= level; i--) {
     digitalWrite(ledPin[i], LOW);
-  }
+   }
 }
 // // the pin that the LED is attached to
 //int sound_level;      // a variable to read incoming serial data into
@@ -98,4 +100,3 @@ void turn_on(int level) {
 //    printf("sound: %d\n", sound_level);
 
 //}
-
