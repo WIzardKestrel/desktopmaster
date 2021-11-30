@@ -15,8 +15,8 @@ void setup() {
 
 void loop() {
 
-  cont_lvl = (analogRead(pot_pin));
-  if (abs(cont_lvl - old_vol_lvl) > 30) {
+  cont_lvl = map(analogRead(pot_pin), 0, 100, 0, 1024);
+  if (abs(cont_lvl - old_vol_lvl) > 2) {
     old_vol_lvl = cont_lvl;
     Serial.println(cont_lvl);
   }else{
@@ -32,7 +32,7 @@ void loop() {
       //Serial.print('\n');
       switch (sound_lvl) {
         case '0':
-          turn_on(10);
+          turn_on(0);
           break;
         case '1':
           turn_on(1);
@@ -69,6 +69,9 @@ void loop() {
         case '9':
           turn_on(9);
           break;
+        case '10':
+            turn_on('10');
+            break;
       }
     }
   }
